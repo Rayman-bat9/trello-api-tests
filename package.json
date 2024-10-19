@@ -1,0 +1,13 @@
+{
+  "name": "trello-api-tests",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "mocha trelloApiTests.js"
+  },
+  "devDependencies": {
+    "axios": "^0.21.4",
+    "chai": "^4.5.0",
+    "mocha": "^10.7.3"
+  }
+}
