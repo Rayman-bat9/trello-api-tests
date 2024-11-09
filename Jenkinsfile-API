@@ -6,6 +6,12 @@ pipeline {
                 bat 'npm install'
             }
         }
+        stage('Run Linters') {
+            steps {
+                bat 'npm run lint:prettier' // Run Prettier
+                bat 'npm run lint:eslint'    // Run ESLint
+            }
+        }
         stage('Run API Tests') {
             steps {
                 bat 'npm run test:api' // Replace with your API test command
