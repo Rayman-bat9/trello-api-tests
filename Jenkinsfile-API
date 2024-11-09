@@ -8,13 +8,13 @@ pipeline {
         }
         stage('Run Linters') {
             steps {
-                bat 'npm run lint:prettier' // Run Prettier
-                bat 'npm run lint:eslint'    // Run ESLint
+                bat 'npm run lint:prettier'
+                bat 'npm run lint:eslint'   
             }
         }
         stage('Run API Tests') {
             steps {
-                bat 'npm run test:api' // Replace with your API test command
+                bat 'npm run test:api' 
             }
         }
     }

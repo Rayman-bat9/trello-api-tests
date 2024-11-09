@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { expect } from 'chai';
 
-const apiKey = 'fc36f1a2fe31e38f8fe9730cfcad2e06'; // Your Trello API Key
+const apiKey = 'fc36f1a2fe31e38f8fe9730cfcad2e06';
 const token =
-  'ATTAeddc4a79b15153e16fd460b9f5bf5f83858931ad84c567d820ecf5ba53716c6a0241B5B6'; // Your Trello Token
+  'ATTAeddc4a79b15153e16fd460b9f5bf5f83858931ad84c567d820ecf5ba53716c6a0241B5B6';
 const baseUrl = 'https://api.trello.com/1';
 
 describe('Trello API Tests', function () {
@@ -23,17 +23,16 @@ describe('Trello API Tests', function () {
       );
 
       console.log('Organizations:', orgResponse.data);
-      this.orgId = orgResponse.data[0]?.id; // Replace with the correct organization ID if needed
+      this.orgId = orgResponse.data[0]?.id;
     } catch (error) {
       console.error(
         'Error fetching organizations:',
         error.response ? error.response.data : error.message
       );
-      throw error; // Rethrow the error to fail the test
+      throw error;
     }
   });
 
-  // Test: Create a board
   it('should create a board', async function () {
     try {
       const response = await axios.post(`${baseUrl}/boards`, null, {
@@ -45,9 +44,8 @@ describe('Trello API Tests', function () {
         },
       });
 
-      boardId = response.data.id; // Save board ID for later use
+      boardId = response.data.id;
 
-      // Assertions
       console.log('Create Board Response:', response.data);
       expect(response.status).to.equal(200);
       expect(response.data.name).to.equal('Test Board');
@@ -57,11 +55,10 @@ describe('Trello API Tests', function () {
         'Error creating board:',
         error.response ? error.response.data : error.message
       );
-      throw error; // Rethrow the error to fail the test
+      throw error;
     }
   });
 
-  // Test: Get the created board
   it('should get the created board', async function () {
     try {
       const response = await axios.get(`${baseUrl}/boards/${boardId}`, {
@@ -71,7 +68,6 @@ describe('Trello API Tests', function () {
         },
       });
 
-      // Assertions
       console.log('Get Board Response:', response.data);
       expect(response.status).to.equal(200);
       expect(response.data.id).to.equal(boardId);
@@ -82,11 +78,10 @@ describe('Trello API Tests', function () {
         'Error getting board:',
         error.response ? error.response.data : error.message
       );
-      throw error; // Rethrow the error to fail the test
+      throw error; 
     }
   });
 
-  // Test: Update the board name
   it('should update the board name', async function () {
     try {
       const response = await axios.put(`${baseUrl}/boards/${boardId}`, null, {
@@ -97,7 +92,6 @@ describe('Trello API Tests', function () {
         },
       });
 
-      // Assertions
       console.log('Update Board Response:', response.data);
       expect(response.status).to.equal(200);
       expect(response.data.name).to.equal('Updated Test Board');
@@ -107,11 +101,10 @@ describe('Trello API Tests', function () {
         'Error updating board:',
         error.response ? error.response.data : error.message
       );
-      throw error; // Rethrow the error to fail the test
+      throw error;
     }
   });
 
-  // Test: Delete the board
   it('should delete the board', async function () {
     try {
       const response = await axios.delete(`${baseUrl}/boards/${boardId}`, {
@@ -121,16 +114,14 @@ describe('Trello API Tests', function () {
         },
       });
 
-      // Assertions
       expect(response.status).to.equal(200);
-      // Check if response data indicates deletion
       expect(response.data).to.have.property('_value').that.is.null;
     } catch (error) {
       console.error(
         'Error deleting board:',
         error.response ? error.response.data : error.message
       );
-      throw error; // Rethrow the error to fail the test
+      throw error;
     }
   });
 });
